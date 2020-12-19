@@ -2,12 +2,13 @@ package infra
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 	"strconv"
 
 	"github.com/khoaminhbui/go-learn/libs"
-	
+
 	"github.com/gorilla/mux"
 )
 
@@ -26,7 +27,7 @@ func getPrime(w http.ResponseWriter, r *http.Request) {
 		response.ErrorCode = 1
 		response.Message = "Invalid number"
 	} else {
-		prime := libs.trialDivision(n)
+		prime := libs.TrialDivision(n)
 		response.Message = "Success"
 		response.Value = prime
 	}
@@ -35,7 +36,9 @@ func getPrime(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(response)
 }
 
-func startSimpleServer() {
+// StartSimpleServer run a simple http server to handle request
+func StartSimpleServer() {
+	fmt.Print("Start HTTP server...")
 
 	// Init router
 	r := mux.NewRouter()
