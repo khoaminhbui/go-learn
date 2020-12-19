@@ -1,37 +1,37 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
-	"encoding/json"
 	"strconv"
 
 	"github.com/gorilla/mux"
 )
 
 type Response struct {
-	ErrorCode	int  	`json:"errorCode"`
-	Message   	string  `json:"message"`
-	Value  		int  	`json:"value"`
+	ErrorCode int    `json:"errorCode"`
+	Message   string `json:"message"`
+	Value     int    `json:"value"`
 }
 
 func trialDivision(n int) int {
-    for i := n-1; i >= 2; i-- {
-        var isPrime = true;
-        for j := 2; j * j <= i; j++ { 
-            if i % j == 0 {
-                isPrime = false;
-                break; 
-            }
-        } 
-        
-        if isPrime {
-            return i;
-        }
-    }
+	for i := n - 1; i >= 2; i-- {
+		var isPrime = true
+		for j := 2; j*j <= i; j++ {
+			if i%j == 0 {
+				isPrime = false
+				break
+			}
+		}
 
-    return 1;
+		if isPrime {
+			return i
+		}
+	}
+
+	return 1
 }
 
 func getPrime(w http.ResponseWriter, r *http.Request) {
@@ -46,10 +46,10 @@ func getPrime(w http.ResponseWriter, r *http.Request) {
 		prime := trialDivision(n)
 		response.Message = "Success"
 		response.Value = prime
-	}	
+	}
 
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(response);
+	json.NewEncoder(w).Encode(response)
 }
 
 func main() {
