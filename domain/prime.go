@@ -1,6 +1,6 @@
 package domain
 
-// TrialDivision salculate largest prime number under an integer
+// TrialDivision calculates largest prime number under an integer
 func TrialDivision(n int) int {
 	for i := n - 1; i >= 2; i-- {
 		var isPrime = true
