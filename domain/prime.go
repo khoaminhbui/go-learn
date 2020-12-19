@@ -1,4 +1,4 @@
-package libs
+package domain
 
 // TrialDivision salculate largest prime number under an integer
 func TrialDivision(n int) int {

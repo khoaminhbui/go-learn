@@ -1,11 +1,11 @@
 package main
 
 import (
+	"github.com/khoaminhbui/go-learn/domain"
 	"github.com/khoaminhbui/go-learn/infra"
-	"github.com/khoaminhbui/go-learn/libs"
 )
 
 func main() {
-	libs.ShowCores()
+	domain.ShowCores()
 	infra.StartSimpleServer()
 }

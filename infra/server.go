@@ -7,11 +7,12 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/khoaminhbui/go-learn/libs"
+	"github.com/khoaminhbui/go-learn/domain"
 
 	"github.com/gorilla/mux"
 )
 
+// Response define data structure for http response object
 type Response struct {
 	ErrorCode int    `json:"errorCode"`
 	Message   string `json:"message"`
@@ -27,7 +28,7 @@ func getPrime(w http.ResponseWriter, r *http.Request) {
 		response.ErrorCode = 1
 		response.Message = "Invalid number"
 	} else {
-		prime := libs.TrialDivision(n)
+		prime := domain.TrialDivision(n)
 		response.Message = "Success"
 		response.Value = prime
 	}
