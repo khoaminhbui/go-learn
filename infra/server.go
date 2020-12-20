@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"strconv"
 
 	"github.com/khoaminhbui/go-learn/domain"
@@ -39,7 +40,7 @@ func getPrime(w http.ResponseWriter, r *http.Request) {
 
 // StartSimpleServer run a simple http server to handle request
 func StartSimpleServer() {
-	fmt.Print("Start HTTP server...")
+	fmt.Println("Start HTTP server...")
 
 	// Init router
 	r := mux.NewRouter()
@@ -48,5 +49,10 @@ func StartSimpleServer() {
 	r.HandleFunc("/prime/{n}", getPrime).Methods("GET")
 
 	// Start server
-	log.Fatal(http.ListenAndServe(":8000", r))
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8000"
+	}
+	fmt.Println("Server run at port: ", port)
+	log.Fatal(http.ListenAndServe(":"+port, r))
 }
